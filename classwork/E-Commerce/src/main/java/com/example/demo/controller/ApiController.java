@@ -61,4 +61,31 @@ public class ApiController {
 		return aser.updateinfobyid(id,s);
 
 	}
-}
+	
+	@GetMapping("sort/{name}")
+	public List<ApiModel> sortinfo(@PathVariable String name){
+		return aser.sortinfo(name);
+	}
+	
+	@GetMapping("paging/{pageno}/{pagesize}")
+	public List<ApiModel> showpageinfo(@PathVariable int pageno,@PathVariable int pagesize)
+	{
+		return aser.getbypage(pageno,pagesize);
+	}
+	
+	@GetMapping("showquery/{id}/{title}")
+	public 	List<ApiModel> showBookdetails(@PathVariable int id,@PathVariable String title)
+	{
+		return aser.get(id, title);
+	}
+	@DeleteMapping("deletequery/{id}")
+	public String deldetails(@PathVariable int id)
+	{
+		return aser.del(id)+"deleted";
+	}
+	@PutMapping("updatequery/{newid}/{oldid}")
+	public String updatedetails(@PathVariable int newid,@PathVariable int oldid)
+	{
+		return aser.update(newid, oldid)+" updated";
+	}
+}		

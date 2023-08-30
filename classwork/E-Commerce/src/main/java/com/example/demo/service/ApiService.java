@@ -3,6 +3,12 @@ package com.example.demo.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
+//import org.springframework.data.domain.Page;
+//import org.springframework.data.domain.PageRequest;
+//import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.model.ApiModel;
@@ -58,5 +64,28 @@ public class ApiService {
 
 		}
 	}
-
+     
+	public List<ApiModel> sortinfo(String s){
+	    return ar.findAll(Sort.by(Sort.DEFAULT_DIRECTION,s));
+	}
+    
+   public List<ApiModel> getbypage(int pgno,int pgsize)
+    {
+  	    Page<ApiModel> p = ar.findAll(PageRequest.of(pgno, pgsize));
+    	return p.getContent();
+    }
+   
+   public List<ApiModel> get(int i,String s)
+	{
+		return ar.getInfo(i, s);
+	}
+	
+	public int del(int id)
+	{
+		return ar.deleteInfo(id);
+	}
+	public int update(int id,int id1)
+	{
+		return ar.updateInfo(id,id1);
+	}
 }
